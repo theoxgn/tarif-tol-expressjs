@@ -1,6 +1,7 @@
 var User = require("../models/User");
 const knex = require("../../db/knex");
 const bcrypt = require("bcrypt");
+const { validationResult } = require('express-validator');
 
 exports.get = async function (req, res) {
     const param = req.body;
@@ -16,8 +17,8 @@ exports.get = async function (req, res) {
     } catch (err) {
         console.log(err);
         return res.status(500).json({
-        success: false,
-        message: "Internal server error",
+            success: false,
+            message: "Internal server error",
         });
     }
 };
@@ -46,9 +47,16 @@ exports.getall = async function (req, res) {
 };
 
 exports.create = async function (req, res) {
+    // req body
+    const data = req.body;
+    const hashedPassword = await bcrypt.hash(data.password, 10)
+    //validator
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({
+        success: false,
+        errors: errors.array()
+    });
     try {
-        const data = req.body;
-        const hashedPassword = await bcrypt.hash(data.password, 10)
         await User.query().insert({
             "Name": data.name,
             "Phone": data.phone,
