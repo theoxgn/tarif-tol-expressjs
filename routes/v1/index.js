@@ -8,9 +8,10 @@ router.get("/", (req, res) => {
 
 var userApi = require('../../api/controller/UserController');
 // User
-router.get('/getUserAll', userApi.get);
+router.get('/getUserAll', userApi.getall);
 // router.get('/user/:id', userApi.getById);
 router.post('/postCreateUser', userApi.create);
+router.post('/postGetUser', userApi.get);
 // router.put('/user/:id', userApi.update);
 // router.delete('/user/:id', userApi.delete);
 module.exports = router;
