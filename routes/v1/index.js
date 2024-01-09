@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {createUserValidation} = require('../../middleware/input-validation');
+const {createUserValidation, loginValidation} = require('../../middleware/input-validation');
 
 router.get("/", (req, res) => {
     return res.send({
@@ -11,9 +11,8 @@ router.get("/", (req, res) => {
 var userApi = require('../../api/controller/UserController');
 // User
 router.get('/getUserAll', userApi.getall);
-// router.get('/user/:id', userApi.getById);
 router.post('/postCreateUser', createUserValidation, userApi.create);
 router.post('/postGetUser', userApi.get);
-// router.put('/user/:id', userApi.update);
-// router.delete('/user/:id', userApi.delete);
+router.post('/user/login', loginValidation, userApi.login);
+
 module.exports = router;

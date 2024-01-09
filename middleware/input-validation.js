@@ -7,3 +7,7 @@ exports.createUserValidation = [
     check('password', 'Password Tidak Boleh Kosong').not().isEmpty(),
     check('password', 'Password minimal 6 karakter').isLength({ min: 6})
 ]
+exports.loginValidation = [
+    check('email', 'email tidak boleh kosong').not().isEmpty(),
+    check('password', 'Password tidak boleh kosong').not().isEmpty()
+]

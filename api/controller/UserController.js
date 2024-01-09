@@ -2,6 +2,7 @@ var User = require("../models/User");
 const knex = require("../../db/knex");
 const bcrypt = require("bcrypt");
 const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
 
 exports.get = async function (req, res) {
     const param = req.body;
@@ -90,3 +91,56 @@ exports.create = async function (req, res) {
         });
     }
 };
+
+exports.login = async function (req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty())
+        return res.status(400).json({
+            success: false,
+            errors: errors.array(),
+        });
+    try {
+        const data = req.body;
+        const email = data.email;
+        const password = data.password;
+        const cek_user = await User.query().where((builder) => {
+            builder.where("Email", email);
+        });
+        console.log("USER:", cek_user);
+        if (cek_user.length > 0) {
+            const data_user = cek_user[0];
+            bcrypt.compare(password, data_user.Password).then(async (isAuthenticated) => {
+                if (!isAuthenticated) {
+                res.json({
+                    success: false,
+                    message: "Password yang Anda masukkan, salah !",
+                });
+                } else {
+                    const data_jwt = {
+                        email: data_user.username,
+                        email: data_user.email,
+                    };
+                    const jwt_token = jwt.sign(data_jwt, process.env.API_SECRET, {
+                        expiresIn: "10m",
+                    });
+                    res.status(200).json({
+                        success: true,
+                        data: data_jwt,
+                        jwt_token,
+                    });
+                }
+            });
+        } else {
+            res.status(400).json({
+                success: false,
+                message: "Username atau Email tidak terdaftar !",
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        });
+    }
+  };
