@@ -7,7 +7,6 @@ const morgan = require('morgan')
 const routerV1 = require('./routes/v1/index')
 app.use(morgan('tiny'));
 
-
 app.get("/ping", (req, res) => {
     res.send({
         error: false,
@@ -28,5 +27,6 @@ app.use(bodyParser.urlencoded({
     limit: '50mb',
     extended: true
 }));
+
 // inisialisasi router
 app.use('/v1/', routerV1);
