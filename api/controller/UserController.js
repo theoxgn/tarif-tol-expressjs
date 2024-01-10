@@ -6,6 +6,20 @@ const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
 exports.get = async function (req, res) {
+
+    /* #swagger.tags = ['User']
+        #swagger.description = 'Endpoint to Get All User' */
+    /* #swagger.parameters['body'] = {
+        name: 'user',
+        in: 'body',
+        description: 'User information.',
+        required: true,
+        schema: { $ref: '#/definitions/UserGetFormat' }
+    } */
+    /* #swagger.security = [{
+        "apiKeyAuth": []
+    }] */
+
     const param = req.body;
     const id = param.id;
     try {
@@ -49,6 +63,20 @@ exports.getall = async function (req, res) {
 };
 
 exports.create = async function (req, res) {
+
+    /* #swagger.tags = ['User']
+        #swagger.description = 'Endpoint to createUser' */
+    /* #swagger.parameters['body'] = {
+        name: 'user',
+        in: 'body',
+        description: 'User information.',
+        required: true,
+        schema: { $ref: '#/definitions/UserRequestFormat' }
+    } */
+    /* #swagger.security = [{
+        "apiKeyAuth": []
+    }] */
+
     // req body
     const data = req.body;
     const hashedPassword = await bcrypt.hash(data.password, 10)
