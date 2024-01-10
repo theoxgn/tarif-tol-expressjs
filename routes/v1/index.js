@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 });
 
 var userApi = require('../../api/controller/UserController');
-// User
+// User untuk routing dan set response
 router.get('/getUserAll', userApi.getall);
 router.post('/postCreateUser', createUserValidation, userApi.create);
 router.post('/postGetUser', userApi.get);
