@@ -11,3 +11,9 @@ exports.loginValidation = [
     check('email', 'email tidak boleh kosong').not().isEmpty(),
     check('password', 'Password tidak boleh kosong').not().isEmpty()
 ]
+
+exports.updateUserValidation = [
+    check('name', 'Nama Tidak Boleh Kosong').not().isEmpty(),
+    check('phone', 'Phone Tidak Boleh Kosong').not().isEmpty(),
+    check('email', 'Email Tidak Boleh Kosong').not().isEmpty()
+]
