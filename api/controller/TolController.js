@@ -1,4 +1,4 @@
-var User = require("../models/User");
+var Tol = require("../models/Tol");
 const knex = require("../../db/knex");
 const bcrypt = require("bcrypt");
 const { validationResult } = require('express-validator');
@@ -41,7 +41,7 @@ exports.get = async function (req, res) {
 
 exports.getall = async function (req, res) {
   try {
-    let users = await User.query();
+    let users = await Tol.query();
     if (users.length > 0) {
       res.status(200).json({
         success: true,
@@ -87,7 +87,7 @@ exports.create = async function (req, res) {
         errors: errors.array()
     });
     try {
-        await User.query().insert({
+        await Tol.query().insert({
             "Name": data.name,
             "Phone": data.phone,
             "Email": data.email,
@@ -132,7 +132,7 @@ exports.login = async function (req, res, next) {
         const data = req.body;
         const email = data.email;
         const password = data.password;
-        const cek_user = await User.query().where((builder) => {
+        const cek_user = await Tol.query().where((builder) => {
             builder.where("Email", email);
         });
         console.log("USER:", cek_user);

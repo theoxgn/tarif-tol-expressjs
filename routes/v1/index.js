@@ -5,17 +5,17 @@ const { authenticateJWT } = require('../../middleware/authentication');
 
 router.get("/", (req, res) => {
     return res.send({
-        project:'API v1 Web Service '
+        project:'API v1 Web Service untuk Tarif Tol'
     });
 });
 
-var userApi = require('../../api/controller/UserController');
+var tolApi = require('../../api/controller/TolController');
 // User untuk routing dan set response
-router.get('/getUserAll', userApi.getall);
-router.post('/postCreateUser', createUserValidation, userApi.create);
-router.post('/postGetUser', userApi.get);
-router.post('/user/login', loginValidation, userApi.login);
-router.put('/putUpdateUser/:id', authenticateJWT, updateUserValidation, userApi.update);
-router.post('/putUpdateUser/:id', authenticateJWT, updateUserValidation, userApi.update);
+router.get('/getUserAll', tolApi.getall);
+router.post('/postCreateUser', createUserValidation, tolApi.create);
+router.post('/postGetUser', tolApi.get);
+router.post('/user/login', loginValidation, tolApi.login);
+router.put('/putUpdateUser/:id', authenticateJWT, updateUserValidation, tolApi.update);
+router.post('/putUpdateUser/:id', authenticateJWT, updateUserValidation, tolApi.update);
 
 module.exports = router;

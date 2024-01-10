@@ -3,7 +3,7 @@ const outputFile = './swagger_output.json';
 const endpointsFiles = ['./routes/v1/index.js']; // root file dimana router dijalankan.
 const doc = {
     info: {
-        title: 'API Pegawai',
+        title: 'API Tarif Tol',
         description: 'Ini adalah Endpoint dari BackEnd',
     },
     host: 'localhost:3000',
