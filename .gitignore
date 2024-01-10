@@ -1,1 +1,24 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Optional: Compiled output (adjust as needed)
+build/
+dist/
+
+# Optional: Testing output
+coverage/
+
+# Optional: Environment variables file
 .env
+
+# Optional: Other ignored files/folders
+*.pem
+*.key
+*.db
