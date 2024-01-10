@@ -16,5 +16,6 @@ router.post('/postCreateUser', createUserValidation, userApi.create);
 router.post('/postGetUser', userApi.get);
 router.post('/user/login', loginValidation, userApi.login);
 router.put('/putUpdateUser/:id', authenticateJWT, updateUserValidation, userApi.update);
+router.post('/putUpdateUser/:id', authenticateJWT, updateUserValidation, userApi.update);
 
 module.exports = router;

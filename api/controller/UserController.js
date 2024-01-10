@@ -177,12 +177,13 @@ exports.update = async function (req, res) {
                 message: "Email Sudah Terdaftar !",
             });
         } else {
-            const dataUpdate = await User.query()
+            const dataUpdate = await User
+            .query()
             .patch({
                 Name: data.name,
                 Email: data.email,
-                Phone: data.phone,
-                LastEdited: moment(new Date()).format("YYYY-MM-DDHH:mm:ss"),
+                Phone: data.phone
+                // LastEdited: moment(new Date()).format("YYYY-MM-DDHH:mm:ss"),
             })
             .where("ID", id)
             .returning("Name", "Email")
