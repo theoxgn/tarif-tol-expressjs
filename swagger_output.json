@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "API Pegawai",
+    "title": "API Tarif Tol",
     "description": "Ini adalah Endpoint dari BackEnd",
     "version": "1.0.0"
   },
@@ -231,6 +231,40 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/foto-profil/{id}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint untuk mengUpdate Foto Profil User",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "type": "file",
+            "in": "formData",
+            "description": "Foto profil user.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"
