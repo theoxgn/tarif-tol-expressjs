@@ -60,4 +60,10 @@ router.put(
   userApi.updateFotoProfil
 );
 
+router.post(
+  "/user/delete-user/",
+  cors(),
+  userApi.delete
+);
+
 module.exports = router;

@@ -286,4 +286,24 @@ exports.updateFotoProfil = async function(req, res){
         })
     }
 }
-  
+
+exports.delete = async (req, res) => {
+
+    const param = req.body;
+    const id = param.id;
+    try {
+        const deletedRows = await knex.raw(`DELETE from users where "ID" = ${id}`)
+        if (deletedRows.rows.length > 0){
+            return res.status(200).json({
+                    success: true,
+                    data: deletedRows.rows,
+                });
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            success: false,
+            message: 'data gagal hapus'
+        })
+    }
+}
