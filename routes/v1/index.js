@@ -10,13 +10,22 @@ const {
 } = require("../../middleware/input-validation");
 const { authenticateJWT } = require("../../middleware/authentication");
 const { upload } = require("../../middleware/file");
+const allowedOrigins = ["http://localhost:3000", "http://localhost:5173"];
 
-app.use(cors());
-
-// CORS is enabled for the selected origins
-let corsOptions = {
-  origin: ["http://localhost:5500", "http://localhost:3000"],
-};
+app.use(
+  cors({
+    origin: "*",
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
+router.use(
+  cors({
+    origin: "*",
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 router.get("/", (req, res) => {
   return res.send({
